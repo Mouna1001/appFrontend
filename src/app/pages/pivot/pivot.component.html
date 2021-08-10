@@ -1,0 +1,84 @@
+
+<div id="pivotgrid-demo">
+    <dx-chart id="barrages-chart">
+      <dxo-common-series-settings type="bar"></dxo-common-series-settings>
+      <dxo-size [height]="320"></dxo-size>
+      <dxo-adaptive-layout [width]="450"></dxo-adaptive-layout>
+      <dxo-tooltip [enabled]="true"  >
+        
+      </dxo-tooltip>
+    </dx-chart>
+
+
+
+    <dx-pivot-grid id="pivotgrid"
+      [showTotalsPrior]="showTotalsPrior ? 'both' : 'none'"
+      [dataFieldArea]="rowsDataFieldArea ? 'row' : 'column'"
+      [rowHeaderLayout]="treeHeaderLayout ? 'tree' : 'standard'"
+      [allowSortingBySummary]="true"
+      [allowFiltering]="true"
+      [showBorders]="true"
+      [allowSorting]="true"
+      [allowExpandAll]="true"
+      [showColumnGrandTotals]="false"
+      [showRowGrandTotals]="false"
+      [showRowTotals]="false"
+      [showColumnTotals]="false"
+      [height]="510"
+      [dataSource]="Pivotdata"
+      (onContextMenuPreparing)="contextMenuPreparing($event)">
+      <dxo-field-chooser [enabled]="true"></dxo-field-chooser>
+      <dxo-scrolling mode="virtual"></dxo-scrolling>
+      <dxo-field-chooser 
+      [height]="500"
+    ></dxo-field-chooser>
+    <!--<dxo-state-storing
+      [enabled]="true"
+      type="localStorage"
+      storageKey="dx-widget-gallery-pivotgrid-storing">
+    </dxo-state-storing>-->
+    <dxo-field-panel
+        [showDataFields]="showDataFields"
+        [showRowFields]="showRowFields"
+        [showColumnFields]="showColumnFields"
+        [showFilterFields]="showFilterFields"
+        [allowFieldDragging]="true"
+        [visible]="true">
+    </dxo-field-panel>
+    <dxo-header-filter
+      [allowSearch]="allowSearch"
+      [showRelevantValues]="showRelevantValues"
+      [width]="300"
+      [height]="400"
+    ></dxo-header-filter>
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-tooltip [enabled]="true"></dxo-tooltip>
+    <dxo-field-chooser 
+      [allowSearch]="true"
+    ></dxo-field-chooser>
+
+    </dx-pivot-grid>
+  </div>
+  <div class="options">
+    <div class="caption">Options</div>
+    <div class="option">
+        <dx-check-box
+          text="Show Data Fields"
+          [(value)]="showDataFields"></dx-check-box>
+    </div>
+    <div class="option"> 
+        <dx-check-box
+          text="Show Row Fields"
+          [(value)]="showRowFields"></dx-check-box>
+    </div>
+    <div class="option">
+        <dx-check-box
+          text="Show Column Fields"
+          [(value)]="showColumnFields"></dx-check-box>
+    </div>
+    <div class="option">
+        <dx-check-box
+          text="Show Filter Fields"
+          [(value)]="showFilterFields"></dx-check-box>
+    </div>
+</div>

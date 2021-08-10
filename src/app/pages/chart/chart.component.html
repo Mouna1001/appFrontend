@@ -1,0 +1,59 @@
+<dx-chart id="chartcontainer"
+    [dataSource]="chartdata"
+    title="Moyenne du réserve"
+
+    >    
+    <dxi-series valueField="reserve" color="#ff7f00" name="Réserve"></dxi-series> 
+    <!-- <dxi-series valueField="year2021" name="2021"></dxi-series> -->
+    <dxo-common-series-settings
+        argumentField="name"
+        type="bar" 
+        hoverMode="allArgumentPoints"
+        [barPadding]="0.3"
+        [ignoreEmptyPoints]="true"
+        selectionMode="allArgumentPoints">
+        <dxo-label 
+            [visible]="true"
+            [format]="{
+                type: 'fixedPoint',
+                precision: '0'
+            }"
+           >
+        </dxo-label> 
+    </dxo-common-series-settings>
+    <dxo-export [enabled]="true"></dxo-export>
+    
+    <dxo-legend
+        verticalAlignment="bottom" 
+        horizontalAlignment="center">
+    </dxo-legend>
+  
+    <dxo-loading-indicator [enabled]="true"></dxo-loading-indicator>
+    <dxo-common-pane-settings>
+        <dxo-border
+            [visible]="true"
+            [width]="2"
+            [top]="false"
+            [right]="false"
+        ></dxo-border> 
+    </dxo-common-pane-settings>
+
+</dx-chart>
+<div class="action">
+
+    <dx-select-box 
+        id="choose-date"
+        [items]="months"
+        (onValueChanged) ="onMonthChanged($event)" 
+        [width]="200"   
+        valueExpr="id" 
+        displayExpr="name"       
+        
+    ></dx-select-box>
+
+    <div class="label">Sélectionner un mois:
+    </div>
+</div> 
+
+
+

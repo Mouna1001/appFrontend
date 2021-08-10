@@ -1,0 +1,38 @@
+  
+    <!--<dx-chart id="chart"
+          [dataSource]="chartdata" title="Capacité Normale par barrage">
+    <dxi-series argumentField="name" valueField="normal_capacity"></dxi-series>
+    <dxo-argument-axis>
+        <dxo-label wordWrap="none" ></dxo-label>
+    </dxo-argument-axis>
+    <dxo-legend [visible]="false"></dxo-legend> 
+</dx-chart>-->
+<div id="chart">
+    <dx-chart
+        
+        [dataSource]="chartdata"
+        title="Capacité Normale par barrage">
+        <dxi-series valueField="normal_capacity"  color="#ff7f00" name="Capacité normale"></dxi-series>
+            
+        <dxo-common-series-settings #seriesSettings
+            argumentField="name"
+            >
+        </dxo-common-series-settings>
+        <dxo-margin [bottom]="20"></dxo-margin>  
+        <dxo-common-axis-settings>
+            <dxo-grid [visible]="true"></dxo-grid>
+        </dxo-common-axis-settings>
+        <dxo-legend
+            verticalAlignment="top"
+            horizontalAlignment="right">
+        </dxo-legend>
+    	<dxo-argument-axis [allowDecimals]="true" [axisDivisionFactor]="60">
+            <dxo-label>
+            	<dxo-format type="decimal"></dxo-format>
+        	</dxo-label>
+    	</dxo-argument-axis>
+        <dxo-export [enabled]="true"></dxo-export>
+        <dxo-tooltip [enabled]="true"></dxo-tooltip>
+    </dx-chart>
+    
+</div>

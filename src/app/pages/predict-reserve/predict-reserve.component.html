@@ -1,0 +1,79 @@
+<form>
+    
+    <div class="m-3 panel panel-default card-body">
+
+        <div class="form-group col-md-6">
+            <label>Nom du barrage</label>
+            <select [(ngModel)]="payload.Name" [ngModelOptions]="{standalone: true}" class="form-select" type="text" aria-label="Default select example">
+                <option [ngValue]="'Al Wahda'">Al Wahda</option>
+                <option [ngValue]="'Al Hanssali'">Al Hanssali</option>
+                <option [ngValue]="'Al Massira'">Al Massira</option>
+                <option [ngValue]="'Bin El Ouidane'">Bin El Ouidane</option>
+                <option [ngValue]="'El Kensera'">El Kensera</option>
+                <option [ngValue]="'Hassan II'">Hassan II</option>
+                <option [ngValue]="'Idriss 1er'">Idriss 1er</option>                   
+                <option [ngValue]="'Mohamed V'">Mohamed V</option>
+                <option [ngValue]="'Oued El Makhazine'">Oued El Makhazine</option>
+                <option [ngValue]="'Oued ZA'">Oued ZA</option>
+               
+              
+            </select>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Taux de remplissage</label>
+            <input [(ngModel)]="payload.Fill_rate" [ngModelOptions]="{standalone: true}" type="number"
+                class="form-control" placeholder="Entrer le taux de remplissage">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Jour</label>
+            <select  [(ngModel)]="payload.day_name" [ngModelOptions]="{standalone: true}" class="form-select" aria-label="Default select example">
+                <option [ngValue]="'Monday'">Lundi</option>
+                <option [ngValue]="'Tuesday'">Mardi</option>
+                <option [ngValue]="'Wednesday'">Mercredi</option>
+                <option [ngValue]="'Thursday'">Jeudi</option>
+                <option [ngValue]="'Friday'">Vendredi</option>
+                <option [ngValue]="'Saturday'">Samedi</option>
+                <option [ngValue]="'Sunday'">Dimanche</option>
+              </select>
+           
+        </div>
+        <div class="form-group col-md-6">
+            <label>Mois</label>
+            <select  [(ngModel)]="payload.month_name"  [ngModelOptions]="{standalone: true}" class="form-select" aria-label="Default select example">
+                <option [ngValue]="'January'">Janvier</option>
+                <option [ngValue]="'February'">Février</option>
+                <option [ngValue]="'March'">Mars</option>
+                <option [ngValue]="'April'">Avril</option>
+                <option [ngValue]="'May'">Mai</option>
+                <option [ngValue]="'June'">Juin</option>
+                <option [ngValue]="'July'">Juillet</option>
+                <option [ngValue]="'August'">Août</option>
+                <option [ngValue]="'September'">Septembre</option>
+                <option [ngValue]="'October'">Octobre</option>
+                <option [ngValue]="'November'">Novembre</option>
+                <option [ngValue]="'December'">Décembre</option>
+              </select>
+          
+        </div>
+        <div class="form-group col-md-6">
+            <label>Année</label>
+            <input [(ngModel)]="payload.Year" [ngModelOptions]="{standalone: true}" type="number" class="form-control"
+                placeholder="Entrer une année">
+        </div>
+        <div class="col-md-6 m-2 d-flex justify-content-end">
+            <button  type="submit" (click)="submitClickHandler()"
+                class="btn btn-primary">Submit</button>
+
+        </div>
+        <div class="m-2" *ngIf="message?.length" id="message">
+           <strong>{{message}}</strong> 
+        </div>
+
+
+    </div>
+
+
+
+
+</form>

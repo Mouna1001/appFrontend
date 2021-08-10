@@ -1,0 +1,60 @@
+<dx-data-grid
+    id="gridContainer"
+    [dataSource]="gridData"
+    
+    [showBorders]="true"
+    [filterSyncEnabled]="false">
+
+    <dxi-column 
+        dataField="name"
+        caption="Nom"
+        alignment="left" 
+        [width]="250">
+       
+    </dxi-column>
+
+    <dxi-column 
+        dataField="normal_capacity"
+        caption="Capacité Normale"
+        alignment="left" 
+        [width]="250">
+       
+    </dxi-column>
+
+
+    <dxi-column 
+        dataField="reserve" 
+        [width]="250"
+        alignment="left"
+        caption="Réserve">
+       
+    </dxi-column>
+
+    <dxi-column 
+        dataField="fill_rate" 
+        caption="Taux De Remplissage"
+        alignment="left" 
+        [width]="250">
+       
+    </dxi-column>
+    
+    <dxi-column 
+        dataField="date" 
+        alignment="left" 
+        caption="Date"
+        [width]="150"
+        dataType="date"
+        format="dd-MM-yyyy"
+        [width]="180"></dxi-column>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-tooltip [enabled]="true"></dxo-tooltip>
+    <dxo-paging 
+        [pageSize]="5"
+        [pageIndex]="1"> <!-- Shows the second page -->
+    </dxo-paging>
+</dx-data-grid>
+
