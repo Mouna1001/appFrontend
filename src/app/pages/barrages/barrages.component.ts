@@ -13,7 +13,7 @@ export class BarragesComponent implements OnInit {
 
   ngOnInit(): void { 
     this.getDataFromServer();     
-  }
+  } 
    
   getDataFromServer() {
     this.http.get('http://localhost:5000/route')
