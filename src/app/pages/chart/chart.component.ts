@@ -16,12 +16,25 @@ export class ChartComponent implements OnInit {
   data: any = [];
   years: any = [{
     id: 1,
-    name: 2020
+    name: 2017
   },
   {
     id: 2,
+    name: 2018
+  },
+  {
+    id: 3,
+    name: 2019
+  },
+  {
+    id: 4,
+    name: 2020
+  },
+  {
+    id: 5,
     name: 2021
-  }]
+  }
+]
   months: any = [{
     id: 1,
     name: "Janvier"
@@ -69,6 +82,7 @@ export class ChartComponent implements OnInit {
     this.http.get('http://localhost:5000/query')
       .subscribe(res => {
         debugger;
+        
         let data: any = res['rows'];
 
         if (data && data.length > 0) {
@@ -76,70 +90,24 @@ export class ChartComponent implements OnInit {
           // data.year2021 = data.filter(flt => flt.year === 2021);
           this.chartdata = new DataSource({
             store: new ArrayStore({
-              data: data.filter(flt => flt.year === 2021)
+              data: data.filter((flt: { year: number; }) => flt.year == 2020 ) 
               
-            })
+            }) 
           })
-
-          /*this.chartdata.forEach((item: { month: string; reserve: any; }) => {
-            if (this.month.indexOf(item.month) == -1) {
-              this.month.push(item.month);
-            }
-
-            this.monthData.push({
-              ...item,
-              ['month' + item.month]: item.reserve
-            });
-          })*/
-          // data.forEach((item: { year: string; reserve: any; }) => {
-          //   if (this.year.indexOf(item.year) == -1) {
-          //     this.year.push(item.year);
-          //   }
-
-          //   this.chartdata.push({
-          //     ...item,
-          //     ['year' + item.year]: item.reserve
-          //   });
-          // })
-          // console.log(this.chartdata, this.year);
         }
-        // this.chartdata = res; 
       })
+        
   }
 
-  onYearChanged(data) {
+  onYearChanged(data: { value: any; }) {
     this.chartdata.filter(['year', '=', data.value]);
     this.chartdata.load();
   }
-  onMonthChanged(data) {
+  onMonthChanged(data: { value: any; }) {
     this.chartdata.filter(['month', '=', data.value]);
     this.chartdata.load();
   }
-  onValueChanged(data) {
-    debugger;
-    this.http.get('http://localhost:5000/query')
-      .subscribe(res => {
-        let data: any = res['rows'];
-
-        if (data && data.length > 0) {
-          data.forEach((item: { month: string; reserve: any; }) => {
-            if (this.month.indexOf(item.month) == -1) {
-              this.month.push(item.month);
-            }
-
-            this.monthData.push({
-              ...item,
-              ['month' + item.month]: item.reserve
-            });
-          })
-          console.log(this.monthData, this.month);
-        }
-        // this.chartdata = res;
-      })
-    console.log(data.value)
-    this.monthData.filter(['month', '=', data.value]);
-    this.monthData.load();
-  }
+  
 }
 
 

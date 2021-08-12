@@ -54,6 +54,20 @@
     <div class="label">Sélectionner un mois:
     </div>
 </div> 
+<div class="action">
 
+    <dx-select-box 
+        id="choose-year"
+        [items]="years"
+        (onValueChanged) ="onYearChanged($event)" 
+        [width]="200"   
+        valueExpr="id" 
+        displayExpr="name"       
+        
+    ></dx-select-box>
+
+    <div class="label">Sélectionner une année :
+    </div>
+</div> 
 
 

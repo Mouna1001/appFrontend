@@ -15,11 +15,11 @@ export const navigation = [
         path: '/barrages'
       },
       {
-        text: 'Moyenne reserve ',
+        text: 'Moy.réserve ',
         path: '/chart'
       },
       {
-        text: 'Moyenne taux de remplissage ',
+        text: 'Moy.taux de remplissage ',
         path: '/chart2'
       },
       {
