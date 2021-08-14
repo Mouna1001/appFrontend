@@ -10,6 +10,34 @@
     margin-top: 20px;
     background-color: rgba(191, 191, 191, 0.15);
 }
+::ng-deep #label {
+     
+    margin-left: 10%;
+}
+
+::ng-deep #choose-date {
+    float: right;
+   
+}
+::ng-deep #choose-year {
+    float: right;
+   
+}
+::ng-deep #sub {
+    margin-left: 35em;
+   
+}
+
+::ng-deep .action {
+    width: 400px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+::ng-deep .label {
+    padding-top: 9px;
+    
+   
+}
 
 .caption {
     font-weight: 500;

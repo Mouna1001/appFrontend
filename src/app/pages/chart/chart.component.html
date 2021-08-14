@@ -1,8 +1,6 @@
 <dx-chart id="chartcontainer"
     [dataSource]="chartdata"
-    title="Moyenne du réserve"
-
-    >    
+    title="Moyenne du réserve">    
     <dxi-series valueField="reserve" color="#ff7f00" name="Réserve"></dxi-series> 
     <!-- <dxi-series valueField="year2021" name="2021"></dxi-series> -->
     <dxo-common-series-settings
@@ -44,30 +42,36 @@
     <dx-select-box 
         id="choose-date"
         [items]="months"
-        (onValueChanged) ="onMonthChanged($event)" 
+        
         [width]="200"   
         valueExpr="id" 
         displayExpr="name"       
-        
+        #month
     ></dx-select-box>
 
     <div class="label">Sélectionner un mois:
     </div>
-</div> 
+</div>
 <div class="action">
 
     <dx-select-box 
         id="choose-year"
         [items]="years"
-        (onValueChanged) ="onYearChanged($event)" 
-        [width]="200"   
-        valueExpr="id" 
-        displayExpr="name"       
         
+        [width]="200"   
+        valueExpr="name" 
+        displayExpr="name"
+        #year
     ></dx-select-box>
 
     <div class="label">Sélectionner une année :
     </div>
+    
 </div> 
+<div  id="sub">
+    <button  type="submit" (click)="onSubmit(month.value,year.value)"
+        class="btn btn-primary">Submit</button>
+
+</div>
 
 

@@ -11,7 +11,7 @@
         type="bar" 
         hoverMode="allArgumentPoints"
         [barPadding]="0.3"
-        [ignoreEmptyPoints]="true"
+        [ignoreEmptyPoints]="true" 
         selectionMode="allArgumentPoints">
         <dxo-label 
       
@@ -20,7 +20,9 @@
                 type: 'fixedPoint',
                 precision: '0'
             }"
+            
            >
+           <!--backgroundColor="green"-->
         </dxo-label> 
     </dxo-common-series-settings>
     <dxo-legend
@@ -45,16 +47,36 @@
     <dx-select-box 
         id="choose-date"
         [items]="months"
-        (onValueChanged) ="onMonthChanged($event)" 
+       
         [width]="200"   
         valueExpr="id" 
         displayExpr="name"       
-        
+        #month
     ></dx-select-box>
 
     <div class="label">Sélectionner un mois:
     </div>
 </div> 
 
+<div class="action">
 
+    <dx-select-box 
+        id="choose-year"
+        [items]="years"
+    
+        [width]="200"   
+        valueExpr="name" 
+        displayExpr="name"
+        #year
+    ></dx-select-box>
+ 
+    <div class="label">Sélectionner une année :
+    </div>
+    
+</div> 
+<div  id="sub">
+    <button  type="submit" (click)="onSubmit(month.value,year.value)"
+        class="btn btn-primary">Submit</button>
+
+</div>
 

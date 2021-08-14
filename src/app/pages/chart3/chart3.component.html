@@ -28,11 +28,56 @@
         </dxo-legend>
     	<dxo-argument-axis [allowDecimals]="true" [axisDivisionFactor]="60">
             <dxo-label>
-            	<dxo-format type="decimal"></dxo-format>
+            	<dxo-format type="fixedPoint"
+                            [precision]="2"></dxo-format>
+
         	</dxo-label>
     	</dxo-argument-axis>
         <dxo-export [enabled]="true"></dxo-export>
-        <dxo-tooltip [enabled]="true"></dxo-tooltip>
+        <dxo-tooltip [enabled]="true"
+        [format]="{
+            type: 'fixedPoint',
+            precision: '2'
+        }"
+        ></dxo-tooltip>
     </dx-chart> <br>
-    <p><strong>NB :</strong> Capacité Normale = 724.4 du 26/10/2017 au 31/10/2017 et du 26/10/2018 au 31/10/2018</p>
+   
+</div>
+
+<div class="action">
+
+    <dx-select-box 
+        id="choose-date"
+        [items]="months"
+       
+        [width]="200"   
+        valueExpr="id" 
+        displayExpr="name"       
+        #month
+    ></dx-select-box>
+
+    <div class="label">Sélectionner un mois:
+    </div>
+</div> 
+
+<div class="action">
+
+    <dx-select-box 
+        id="choose-year"
+        [items]="years"
+    
+        [width]="200"   
+        valueExpr="name" 
+        displayExpr="name"
+        #year
+    ></dx-select-box>
+ 
+    <div class="label">Sélectionner une année :
+    </div>
+    
+</div> 
+<div  id="sub">
+    <button  type="submit" (click)="onSubmit(month.value,year.value)"
+        class="btn btn-primary">Submit</button>
+
 </div>

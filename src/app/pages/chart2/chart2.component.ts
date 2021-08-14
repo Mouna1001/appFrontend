@@ -1,29 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import DataSource from 'devextreme/data/data_source';
-import ArrayStore from 'devextreme/data/array_store';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 @Component({
-  selector: 'app-chart2',
+  selector: 'app-chart',
   templateUrl: './chart2.component.html',
   styleUrls: ['./chart2.component.scss']
 })
 export class Chart2Component implements OnInit {
-
-  chartdata: any = [];
+  chartdata: any;
+  y: any;
+  m: any;
   year: any = [];
-  month:any = [];
-  monthData:any=[];
-  data:any=[];
-  
+  month: any = [];
+  monthData: any = [];
+  data: any = [];
+  date = new Date();
   years: any = [{
     id: 1,
-    name: 2020
+    name: 2017
   },
   {
     id: 2,
+    name: 2018
+  },
+  {
+    id: 3,
+    name: 2019
+  },
+  {
+    id: 4,
+    name: 2020
+  },
+  {
+    id: 5,
     name: 2021
-  }]
+  }
+]
   months: any = [{
     id: 1,
     name: "Janvier"
@@ -60,86 +73,49 @@ export class Chart2Component implements OnInit {
   }, {
     id: 12,
     name: "Décembre" 
-  }]; 
-
-  constructor(private http: HttpClient) { }
+  }];
+  constructor(private http: HttpClient) { } 
   ngOnInit(): void {
-    this.getDataFromServer();
+    this.getDataFromServer();    
   }
 
-  getDataFromServer() {
-    this.http.get('http://localhost:5000/query')
+  getDataFromServer(year=null, month=null) { 
+    if(year==null && month==null){
+      this.y = formatDate(this.date,'yyyy','en')
+      this.m = formatDate(this.date,'M','en')
+    }else{
+      if(year==null && month !=null){
+        this.y = formatDate(this.date,'yyyy','en')
+        this.m=month
+      }else if(year!=null && month==null){
+        this.y=year
+        this.m = formatDate(this.date,'M','en')
+      }else if (year!=null && month !=null){
+        this.y=year
+        this.m=month
+      }
+    }
+    const params = new HttpParams()
+    .set('year',this.y) 
+    .set('month',this.m) 
+    this.http.get('http://localhost:5000/query',{params})
       .subscribe(res => {
-        debugger;
+        //debugger;
         let data: any = res['rows'];
-
         if (data && data.length > 0) {
-          // data.year2020 = data.filter(flt => flt.year === 2020);
-          // data.year2021 = data.filter(flt => flt.year === 2021);
-          this.chartdata = new DataSource({
-            store: new ArrayStore({
-              data: data.filter(flt => flt.year === 2021)
-              
-            })
-          })
-
-          /*this.chartdata.forEach((item: { month: string; fill_rate: any; }) => {
-            if (this.month.indexOf(item.month) == -1) {
-              this.month.push(item.month);
-            }
-
-            this.monthData.push({
-              ...item,
-              ['month' + item.month]: item.fill_rate
-            });
-          })*/
-          // data.forEach((item: { year: string; fill_rate: any; }) => {
-          //   if (this.year.indexOf(item.year) == -1) {
-          //     this.year.push(item.year);
-          //   }
-
-          //   this.chartdata.push({
-          //     ...item,
-          //     ['year' + item.year]: item.fill_rate
-          //   });
-          // })
-          // console.log(this.chartdata, this.year);
+          this.chartdata = data
+          
         }
-        // this.chartdata = res; 
-      })
+      })        
   }
 
-  onYearChanged(data) {
-    this.chartdata.filter(['year', '=', data.value]);
-    this.chartdata.load();
-  }
-  onMonthChanged(data) {
-    this.chartdata.filter(['month', '=', data.value]);
-    this.chartdata.load();
-  }
-  onValueChanged(data) {
-    debugger;
-    this.http.get('http://localhost:5000/query')
-      .subscribe(res => {
-        let data: any = res['rows'];
+  
+  onSubmit(month,year){
+    this.getDataFromServer(year,month);     
+  }  
+} 
 
-        if (data && data.length > 0) {
-          data.forEach((item: { month: string; fill_rate: any; }) => {
-            if (this.month.indexOf(item.month) == -1) {
-              this.month.push(item.month);
-            }
 
-            this.monthData.push({
-              ...item,
-              ['month' + item.month]: item.fill_rate
-            });
-          })
-          console.log(this.monthData, this.month);
-        }
-        // this.chartdata = res;
-      })
-    console.log(data.value)
-    this.monthData.filter(['month', '=', data.value]);
-    this.monthData.load();
-  }
-}
+
+
+

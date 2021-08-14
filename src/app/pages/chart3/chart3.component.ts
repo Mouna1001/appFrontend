@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient,HttpParams } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-chart3',
@@ -9,21 +9,127 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Chart3Component implements OnInit {
 
-  chartdata: any = [];
-  
-
-  constructor(private http: HttpClient) { }
+  chartdata: any; 
+  y: any;
+  m: any;
+  year: any = [];
+  month: any = [];
+  monthData: any = [];
+  data: any = [];
+  date = new Date();
+  years: any = [{
+    id: 1,
+    name: 2017
+  },
+  {
+    id: 2,
+    name: 2018
+  },
+  {
+    id: 3,
+    name: 2019
+  },
+  {
+    id: 4,
+    name: 2020
+  },
+  {
+    id: 5,
+    name: 2021
+  }
+]
+  months: any = [{
+    id: 1,
+    name: "Janvier"
+  }, {
+    id: 2,
+    name: "Février"
+  }, {
+    id: 3,
+    name: "Mars"
+  }, {
+    id: 4,
+    name: "Avril"
+  }, { 
+    id: 5,
+    name: "Mai"
+  }, {
+    id: 6,
+    name: "Juin"
+  }, {
+    id: 7,
+    name: "Juillet"
+  }, {
+    id: 8,
+    name: "Août"
+  }, {
+    id: 9,
+    name: "Septembre"
+  }, {
+    id: 10,
+    name: "Octobre"
+  }, {
+    id: 11,
+    name: "Novembre"
+  }, {
+    id: 12,
+    name: "Décembre" 
+  }];
+  constructor(private http: HttpClient) { } 
   ngOnInit(): void {
-    this.getDataFromServer();
+    this.getDataFromServer();    
   }
 
-  getDataFromServer() {
-  
-    this.http.get('http://localhost:5000/select')
-    .subscribe(res => {
-      this.chartdata = res['rows'];
-    })
-  }  
+  getDataFromServer(year=null, month=null) { 
+    if(year==null && month==null){
+      this.y = formatDate(this.date,'yyyy','en')
+      this.m = formatDate(this.date,'M','en')
+    }else{
+      if(year==null && month !=null){
+        this.y = formatDate(this.date,'yyyy','en')
+        this.m=month
+      }else if(year!=null && month==null){
+        this.y=year
+        this.m = formatDate(this.date,'M','en')
+      }else if (year!=null && month !=null){
+        this.y=year
+        this.m=month
+      }
+    }
+    const params = new HttpParams()
+    .set('year',this.y) 
+    .set('month',this.m) 
+    this.http.get('http://localhost:5000/select',{params}) 
+      .subscribe(res => {
+        //debugger;
+        let data: any = res['rows'];
+        if (data && data.length > 0) {
+          this.chartdata = data
+          //data.year2020 = data.filter(flt => flt.year === 2020);
+          // data.year2021 = data.filter(flt => flt.year === 2021);
+          //this.chartdata = data
+          //new DataSource({
+            //store: new ArrayStore({
+              ///data 
+              //data: data.filter((flt: { year: number; }) => flt.year )  
+            //}) 
+          //})
+        }
+      })        
+  }
 
-       
-}
+  /*onYearChanged(data: { value: any; }) {
+    this.getDataFromServer(data.value)
+    //this.chartdata.filter(['year', '=', this.y]);
+    //this.chartdata.load();
+  }
+  onMonthChanged(data: { value: any; }) {
+    this.getDataFromServer(null,data.value)
+    //this.chartdata.filter(['month', '=', data.value]);
+    //this.chartdata.load();
+    //console.log('temp',data)
+  }*/
+  onSubmit(month,year){
+    this.getDataFromServer(year,month);     
+  }  
+} 

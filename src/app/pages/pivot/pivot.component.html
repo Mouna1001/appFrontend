@@ -1,10 +1,13 @@
 
-<div id="pivotgrid-demo">
+<div id="pivotgridchart">
     <dx-chart id="barrages-chart">
       <dxo-common-series-settings type="bar"></dxo-common-series-settings>
       <dxo-size [height]="320"></dxo-size>
-      <dxo-adaptive-layout [width]="450"></dxo-adaptive-layout>
-      <dxo-tooltip [enabled]="true"  >
+      <dxo-adaptive-layout [width]="600"></dxo-adaptive-layout>
+      <dxo-tooltip [enabled]="true" [format]="{
+        type: 'fixedPoint',
+        precision: '2'
+    }" >
         
       </dxo-tooltip>
     </dx-chart>

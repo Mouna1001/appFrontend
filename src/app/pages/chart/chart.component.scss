@@ -16,6 +16,10 @@
     float: right;
    
 }
+::ng-deep #sub {
+    margin-left: 35em;
+   
+}
 
 ::ng-deep .action {
     width: 400px;
