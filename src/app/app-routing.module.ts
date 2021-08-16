@@ -8,7 +8,7 @@ import { ChartComponent } from './pages/chart/chart.component';
 import { Chart2Component } from './pages/chart2/chart2.component';
 import { Chart3Component } from './pages/chart3/chart3.component';
 import { PivotComponent } from './pages/pivot/pivot.component';
-import { WeatherComponent } from './pages/Weather/weather.component';
+import { WeatherComponent } from './pages/weather/weather.component';
 import { PredictComponent } from './pages/predict/predict.component';
 import { PredictReserveComponent } from './pages/predict-reserve/predict-reserve.component';
 
