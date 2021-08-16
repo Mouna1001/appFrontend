@@ -26,9 +26,7 @@ export class PredictComponent implements OnInit {
     this.httpclient.post('https://app-predication.herokuapp.com/predict', this.payload).subscribe((data: any) => {
       this.message = data.message;
     }
-    /**this.httpclient.post('http://127.0.0.1:8000/predict', this.payload).subscribe((data: any) => {
-      this.message = data.message;
-    }**/
+  
     );
   } 
 }    

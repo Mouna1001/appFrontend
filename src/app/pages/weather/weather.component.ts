@@ -29,21 +29,7 @@ export class WeatherComponent implements OnInit {
   ngOnInit(){
     this.getLocation();
   }
-  /*getforecast(city: string) {
-  this.weatherservice.getDailyForecast(city).subscribe(data => {
-    this.forecastWeather = Array.of(data);
-     console.log("Forecast Data : ", data); // Log forecast weather data
-    // Get forecast Days
-        for(let i=0;i<data['list'].length;i+=8)
-        {
-          this.details.push(data['list'][i]);
-        }
-        this.city=data.city.name;
-        this.country=data.city.country;
-        })
   
-}*/
-
  
   getLocation() {
     if ('geolocation' in navigator) {
@@ -90,23 +76,14 @@ export class WeatherComponent implements OnInit {
       this.city=data['city'].name;
       this.country=data['city'].country;
 
-      //for(let i=0;i<5;i+=8){
-        //this.saveWeatherData(city,data['list'][i].main.temp,data['list'][i].wind.speed,data['list'][i].main.pressure,
-        //data['list'][i].main.humidity,data['list'][i].dt_txt); 
-      //}
     });
   }
-  //saveWeatherData(city,temperature,wind,pression,humidity,date){
+
   saveWeatherData(temp){
-    console.log('1')
-    //const dt = formatDate(date,'yyyy-M-dd','en');
+   
     const params = new HttpParams()
     .set('temp',temp) 
-    /*.set('temperature',temperature) 
-    .set('wind',wind) 
-    .set('humidity',humidity) 
-    .set('pression',pression)*/ 
-    //.set('date',dt) 
+  
     this.http.post('http://localhost:5000/query/saveWeather',{temp})
       .subscribe(res => {
         console.log('res');

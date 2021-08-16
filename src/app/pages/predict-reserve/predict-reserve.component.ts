@@ -26,9 +26,7 @@ export class PredictReserveComponent implements OnInit {
     this.httpclient.post('https://reserve-prediction.herokuapp.com/predict', this.payload).subscribe((data: any) => {
       this.message = data.message;
     }
-    /**this.httpclient.post('http://127.0.0.1:8000/predict', this.payload).subscribe((data: any) => {
-      this.message = data.message;
-    }**/
+  
     );
   } 
 }    

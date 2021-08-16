@@ -101,34 +101,16 @@ export class Chart3Component implements OnInit {
     .set('month',this.m) 
     this.http.get('http://localhost:5000/select',{params}) 
       .subscribe(res => {
-        //debugger;
+      
         let data: any = res['rows'];
         if (data && data.length > 0) {
           this.chartdata = data
-          //data.year2020 = data.filter(flt => flt.year === 2020);
-          // data.year2021 = data.filter(flt => flt.year === 2021);
-          //this.chartdata = data
-          //new DataSource({
-            //store: new ArrayStore({
-              ///data 
-              //data: data.filter((flt: { year: number; }) => flt.year )  
-            //}) 
-          //})
+         
         }
       })        
   }
 
-  /*onYearChanged(data: { value: any; }) {
-    this.getDataFromServer(data.value)
-    //this.chartdata.filter(['year', '=', this.y]);
-    //this.chartdata.load();
-  }
-  onMonthChanged(data: { value: any; }) {
-    this.getDataFromServer(null,data.value)
-    //this.chartdata.filter(['month', '=', data.value]);
-    //this.chartdata.load();
-    //console.log('temp',data)
-  }*/
+ 
   onSubmit(month,year){
     this.getDataFromServer(year,month);     
   }  

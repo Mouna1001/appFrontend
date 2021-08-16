@@ -100,7 +100,7 @@ export class Chart2Component implements OnInit {
     .set('month',this.m) 
     this.http.get('http://localhost:5000/query',{params})
       .subscribe(res => {
-        //debugger;
+       
         let data: any = res['rows'];
         if (data && data.length > 0) {
           this.chartdata = data
