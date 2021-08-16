@@ -34,7 +34,7 @@ export class PivotComponent implements OnInit {
   
   constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     this.getDataFromServer();
   }
   
