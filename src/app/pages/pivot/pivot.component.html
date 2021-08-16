@@ -2,14 +2,14 @@
 <div id="pivotgridchart">
     <dx-chart id="barrages-chart">
       <dxo-common-series-settings type="bar"></dxo-common-series-settings>
-      <dxo-size [height]="320"></dxo-size>
-      <dxo-adaptive-layout [width]="600"></dxo-adaptive-layout>
+      <dxo-size [height]="400"></dxo-size>
+      <dxo-adaptive-layout [width]="450"></dxo-adaptive-layout>
       <dxo-tooltip [enabled]="true" [format]="{
-        type: 'fixedPoint',
+        type: 'largeNumber',
         precision: '2'
-    }" >
-        
-      </dxo-tooltip>
+    }" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+    
+    
     </dx-chart>
 
 
@@ -35,6 +35,7 @@
       <dxo-field-chooser 
       [height]="500"
     ></dxo-field-chooser>
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
     <!--<dxo-state-storing
       [enabled]="true"
       type="localStorage"

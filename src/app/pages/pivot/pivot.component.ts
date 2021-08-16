@@ -55,7 +55,7 @@ export class PivotComponent implements OnInit {
         fields:[{
           caption : "Taux de remplissage",
           dataField:"fill_rate",
-          summaryType: "sum",
+          summaryType: "avg",
           format:{
              type: "largeNumber",
              precision:2
@@ -68,7 +68,7 @@ export class PivotComponent implements OnInit {
         {
          caption : "Capacité normale",
          dataField:"normal_capacity",
-         summaryType: "sum",
+         summaryType: "avg",
          format:{
             type: "largeNumber",
             precision:2
@@ -77,7 +77,7 @@ export class PivotComponent implements OnInit {
         },
         {caption : "Réserve",
           dataField:"reserve",
-          summaryType: "sum",
+          summaryType: "avg",
           format:{
              type: "largeNumber",
              precision:2
@@ -97,7 +97,11 @@ export class PivotComponent implements OnInit {
       alternateDataFields: false
     });
   }
-  
+  customizeTooltip(args) {
+    return {
+      html: args.seriesName + " " + args.valueText + "</div>"
+    };
+  }
   contextMenuPreparing(e) {
     var dataSource = e.component.getDataSource(),
         sourceField = e.field;

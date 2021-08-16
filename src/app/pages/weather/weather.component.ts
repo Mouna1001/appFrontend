@@ -53,8 +53,8 @@ export class WeatherComponent implements OnInit {
         this.weatherservice.getWeatherDataByCoords(this.lat, this.lon).subscribe(data => {
           this.weather = data;
         })
-        const name = this.weather.name;
-        this.weatherservice.getDailyForecast(name).subscribe((data)=>{
+        //const name = this.weather.name;
+        this.weatherservice.getDailyForecast(this.weather.name).subscribe((data)=>{
           this.details = [];
           //filtering the five days forecast
           for(let i=0;i<data['list'].length;i+=8)
@@ -84,10 +84,9 @@ export class WeatherComponent implements OnInit {
       for(let i=0;i<data['list'].length;i+=8)
       {
         this.details.push(data['list'][i]);
-        console.log('ii')
-        this.saveWeatherData(city,data['list'][i].main.temp,data['list'][i].wind.speed,data['list'][i].main.pressure,
-        data['list'][i].main.humidity,data['list'][i].dt_txt); 
       }
+      this.details.push(data['city'].name);
+      this.saveWeatherData(this.details);
       this.city=data['city'].name;
       this.country=data['city'].country;
 
@@ -97,18 +96,20 @@ export class WeatherComponent implements OnInit {
       //}
     });
   }
-  saveWeatherData(city,temperature,wind,pression,humidity,date){
-    const dt = formatDate(date,'yyyy-M-dd','en');
+  //saveWeatherData(city,temperature,wind,pression,humidity,date){
+  saveWeatherData(temp){
+    console.log('1')
+    //const dt = formatDate(date,'yyyy-M-dd','en');
     const params = new HttpParams()
-    .set('city',city) 
-    .set('temperature',temperature) 
+    .set('temp',temp) 
+    /*.set('temperature',temperature) 
     .set('wind',wind) 
     .set('humidity',humidity) 
-    .set('pression',pression) 
-    .set('date',dt) 
-    this.http.get('http://localhost:5000/query/saveWeather',{params})
+    .set('pression',pression)*/ 
+    //.set('date',dt) 
+    this.http.post('http://localhost:5000/query/saveWeather',{temp})
       .subscribe(res => {
-        console.log('res',res);
+        console.log('res');
       }) 
   }
 }
