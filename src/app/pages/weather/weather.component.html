@@ -1,87 +1,91 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
     <h1>{{ title }}</h1>
-  
-  </div>
-  
-  <div class="container">
+</div>
+
+<div class="container">
     <div *ngIf="weather; else waiting">
-    <div class="col-sm-12 text-center">
-      <div class="input-group mt-5">
-        <input class="form-control" type="text" #userInput placeholder="Entrer une ville">
-        <div class="input-group-append">
-          <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput.value)">Recherche</button>
+        <div class="col-sm-12 text-center">
+            <div class="input-group mt-5">
+                <input class="form-control" type="text" #userInput placeholder="Entrer une ville">
+                <div class="input-group-append">
+                    <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput.value)">Recherche ss</button>
+                </div>
+            </div>
+            <h5>La météo à {{ weather.name }}, {{ weather.sys.country }}</h5>
         </div>
-      </div>
-      <h5>La météo à {{ weather.name }},  {{ weather.sys.country }}</h5>
-     
-    </div>
-    <div class="col-sm-12 text-center">
-      <span class="temp"><img  src="assets/{{ weather.weather[0].icon }}.png" alt="01d.png">
+        <div class="col-sm-12 text-center">
+            <span class="temp"><img  src="https://app-barrage.herokuapp.com/src/assets/{{ weather.weather[0].icon }}.png" alt="01d.png">
       {{ weather.main.temp | number: '1.0-0' }} &#176;C</span>
-      
-    </div> <br>
-    <table class="table table-striped table-bordered table-sm">
-      <tbody>
-      <tr>
-         <td>Vent</td> <td>{{weather.wind.speed}} m/s</td>
-      </tr>
-      <tr>
-        <td>Pression</td> <td>{{ weather.main.pressure }} hPa</td>
-      </tr>
-      <tr>
-       <td>Humidité</td> <td>{{ weather.main.humidity}} %</td>
-      </tr>
-      <tr>
-        <td>Lever du soleil</td> <td>{{ weather.sys.sunrise * 1000 | date: 'H:mm' }}</td>
-      </tr>
-      <tr>
-        <td>Coucher du soleil</td> <td>{{ weather.sys.sunset * 1000 | date: 'H:mm' }}</td>
-      </tr>
-      
-      
-      </tbody>
-    </table>
-    
-    <div class="row">
-     
-      <div class="card col-md-15"  *ngFor="let item of details ">
-        <div class="card-header"><h5 class="card-title"> {{item.dt_txt |date:locale }}</h5></div>
-        <div class="card-img-top">
-          <img  src="http://openweathermap.org/img/w/{{item['weather'][0].icon}}.png" alt="">
-          <h4>{{item['main'].temp}} °C</h4>  <!-- <h5>{{item['weather'][0].main}} </h5>-->
-          
-          <span class="badge badge-warning">{{item['main'].temp_max}} °C</span>
-          <span class="badge badge-secondary">{{item['main'].temp_min}} °C</span>
-  
-         
+        </div> <br>
+        <table class="table table-striped table-bordered table-sm">
+            <tbody>
+                <tr>
+                    <td>Vent</td>
+                    <td>{{weather.wind.speed}} m/s</td>
+                </tr>
+                <tr>
+                    <td>Pression</td>
+                    <td>{{ weather.main.pressure }} hPa</td>
+                </tr>
+                <tr>
+                    <td>Humidité</td>
+                    <td>{{ weather.main.humidity}} %</td>
+                </tr>
+                <tr>
+                    <td>Lever du soleil</td>
+                    <td>{{ weather.sys.sunrise * 1000 | date: 'H:mm' }}</td>
+                </tr>
+                <tr>
+                    <td>Coucher du soleil</td>
+                    <td>{{ weather.sys.sunset * 1000 | date: 'H:mm' }}</td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+        <div class="row">
+
+            <div class="card col-md-15" *ngFor="let item of details ">
+                <div class="card-header">
+                    <h5 class="card-title"> {{item.dt_txt |date:locale }}</h5>
+                </div>
+                <div class="card-img-top">
+                    <img src="http://openweathermap.org/img/w/{{item['weather'][0].icon}}.png" alt="">
+                    <h4>{{item['main'].temp}} °C</h4>
+                    <!-- <h5>{{item['weather'][0].main}} </h5>-->
+
+                    <span class="badge badge-warning">{{item['main'].temp_max}} °C</span>
+                    <span class="badge badge-secondary">{{item['main'].temp_min}} °C</span>
+
+
+                </div>
+                <div class="card-body">
+                    <!-- <h5>{{item['weather'][0].description}} </h5>-->
+
+                    <h6>Vent : {{item['wind'].speed}} m/s </h6>
+
+                    <h6>Pression : {{item['main'].pressure}} hPa</h6>
+
+                    <h6>Humidité : {{item['main'].humidity}} %</h6>
+
+
+
+
+                </div>
+
+            </div>
         </div>
-        <div class="card-body">
-         <!-- <h5>{{item['weather'][0].description}} </h5>-->
-          
-          <h6>Vent : {{item['wind'].speed}} m/s  </h6>
-         
-          <h6>Pression : {{item['main'].pressure}}  hPa</h6>
-  
-          <h6>Humidité : {{item['main'].humidity}} %</h6>
-
-
-         
-         
-        </div>
-
-      </div>
     </div>
-  </div> 
-  <ng-template #waiting>Please wait...
-    <div *ngIf="locationDeined">
-      <div class="input-group mt-5" *ngIf="locationDeinedEnableCity">
-        <input class="form-control" type="text" #userInput placeholder="Entrer une ville">
-        <div class="input-group-append">
-          <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput.value)">Recherche</button>
+    <ng-template #waiting>Please wait...
+        <div *ngIf="locationDeined">
+            <div class="input-group mt-5" *ngIf="locationDeinedEnableCity">
+                <input class="form-control" type="text" #userInput placeholder="Entrer une ville">
+                <div class="input-group-append">
+                    <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput.value)">Recherche</button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
     </ng-template>
-  </div>
-  
+</div>
