@@ -84,7 +84,7 @@ export class WeatherComponent implements OnInit {
     const params = new HttpParams()
     .set('temp',temp) 
   
-    this.http.post('http://localhost:5000/query/saveWeather',{temp})
+    this.http.post('https://backend-barrages.herokuapp.com/query/saveWeather',{temp})
       .subscribe(res => {
         console.log('res');
       }) 
