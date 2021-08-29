@@ -13,7 +13,11 @@ import { PredictComponent } from './pages/predict/predict.component';
 import { PredictReserveComponent } from './pages/predict-reserve/predict-reserve.component';
 
 const routes: Routes = [
- 
+  
+   { path:'',
+    redirectTo: 'weather',
+    pathMatch:'full'
+  },
   
   
   {
